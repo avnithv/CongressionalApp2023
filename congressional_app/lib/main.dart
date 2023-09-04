@@ -30,13 +30,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var selectedPage = 0;
   var coins = 693;
+  var list = [];
+  var control = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Widget page;
-    switch(selectedPage) {
+    switch (selectedPage) {
       case 0:
-        page = const Placeholder();
+        page = buildTasks(context);
         break;
       case 1:
         page = const Placeholder();
@@ -60,15 +62,14 @@ class _MyHomePageState extends State<MyHomePage> {
           AppBar(
             leading: const Icon(Icons.child_care),
             title: Center(
-              child: Text(
-                "FocusBuddy",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            ),
+                child: Text(
+              "FocusBuddy",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            )),
             actions: [
               Text(
                 "$coins",
@@ -92,28 +93,85 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                onPressed: () => {setState(() {selectedPage = 0;})},
-                icon: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimaryContainer)
-              ),
+                  onPressed: () => {
+                        setState(() {
+                          selectedPage = 0;
+                        })
+                      },
+                  icon: Icon(Icons.home,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
               IconButton(
-                onPressed: () => {setState(() {selectedPage = 1;})},
-                icon: Icon(Icons.task, color: Theme.of(context).colorScheme.onPrimaryContainer)
-              ),
+                  onPressed: () => {
+                        setState(() {
+                          selectedPage = 1;
+                        })
+                      },
+                  icon: Icon(Icons.task,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
               IconButton(
-                onPressed: () => {setState(() {selectedPage = 2;})},
-                icon: Icon(Icons.map_sharp, color: Theme.of(context).colorScheme.onPrimaryContainer)
-              ),
+                  onPressed: () => {
+                        setState(() {
+                          selectedPage = 2;
+                        })
+                      },
+                  icon: Icon(Icons.map_sharp,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
               IconButton(
-                onPressed: () => {setState(() {selectedPage = 3;})},
-                icon: Icon(Icons.chat, color: Theme.of(context).colorScheme.onPrimaryContainer)
-              ),
+                  onPressed: () => {
+                        setState(() {
+                          selectedPage = 3;
+                        })
+                      },
+                  icon: Icon(Icons.chat,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
               IconButton(
-                onPressed: () => {setState(() {selectedPage = 4;})},
-                icon: Icon(Icons.settings, color: Theme.of(context).colorScheme.onPrimaryContainer)
-              ),
+                  onPressed: () => {
+                        setState(() {
+                          selectedPage = 4;
+                        })
+                      },
+                  icon: Icon(Icons.settings,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      list.add(control.text);
+    });
+  }
+
+  Widget buildTasks(BuildContext context) {
+    var w = <Widget>[const Text('Here is your to do list:')];
+    for (int i = 0; i < list.length; i++) {
+      w.add(Text(
+        list[i],
+        style: Theme.of(context).textTheme.headlineMedium,
+      ));
+    }
+    w.add(TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'Enter a new task',
+      ),
+      controller: control,
+    ));
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text("Add Tasks"),
+      ),
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: w),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }
