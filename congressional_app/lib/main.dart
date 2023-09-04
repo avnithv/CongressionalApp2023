@@ -30,13 +30,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var selectedPage = 0;
   var coins = 693;
-
+  var list = [];
+  var control = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     Widget page;
     switch(selectedPage) {
       case 0:
-        page = const Placeholder();
+        page = buildTasks(context);
         break;
       case 1:
         page = const Placeholder();
@@ -114,6 +116,46 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      list.add(control.text);
+    });
+  }
+  
+  @override
+  Widget buildTasks(BuildContext context) {
+    var w = <Widget>[const Text('Here is your to do list:')];
+    for (int i = 0; i < list.length; i++) {
+      w.add(Text(
+        list[i],
+        style: Theme.of(context).textTheme.headlineMedium,
+      ));
+    }
+    w.add(TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'Enter a new task',
+      ),
+      controller: control,
+    ));
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: w),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }
