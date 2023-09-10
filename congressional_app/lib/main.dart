@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import "chat_screen.dart";
+
 void main() {
   runApp(const MyApp());
 }
@@ -38,15 +40,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedPage) {
       case 0:
-        page = buildTasks(context);
+        page = const Placeholder();
         break;
       case 1:
-        page = const Placeholder();
+        page = buildTasks(context);
         break;
       case 2:
         page = const Placeholder();
         break;
       case 3:
+        // page = ChatScreen();
         page = const Placeholder();
         break;
       case 4:
