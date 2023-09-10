@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const Placeholder();
         break;
       case 1:
-        page = buildTasks(context);
+        page = const TasksWidget();
         break;
       case 2:
         page = const Placeholder();
@@ -141,14 +141,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
 
-  void _incrementCounter() {
-    setState(() {
-      list.add(control.text);
-    });
-  }
 
-  Widget buildTasks(BuildContext context) {
+
+class TasksWidget extends StatefulWidget {
+  const TasksWidget({super.key});
+
+  @override
+  State<TasksWidget> createState() => _TasksWidgetState();
+}
+
+class _TasksWidgetState extends State<TasksWidget> {
+  var list = [];
+  var control = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     var w = <Widget>[const Text('Here is your to do list:')];
     for (int i = 0; i < list.length; i++) {
       w.add(Text(
@@ -157,16 +166,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ));
     }
     w.add(TextField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Enter a new task',
-      ),
-      controller: control,
+      decoration: const InputDecoration(
+      border: OutlineInputBorder(),
+      hintText: 'Enter a new task',
+    ),
+    controller: control,
     ));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Add Tasks"),
+        title: const Text("Add Tasks"),
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: w),
@@ -177,5 +186,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+  void _incrementCounter() {
+    setState(() {
+      list.add(control.text);
+    });
   }
 }
