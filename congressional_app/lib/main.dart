@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import "chat_screen.dart";
+import "task_page.dart";
+import "dashboard_page.dart";
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
       home: MyHomePage(),
@@ -38,15 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedPage) {
       case 0:
-        page = buildTasks(context);
+        page = const DashboardPage();
         break;
       case 1:
-        page = const Placeholder();
+        page = const TasksWidget();
         break;
       case 2:
         page = const Placeholder();
         break;
       case 3:
+        // page = ChatScreen();
         page = const Placeholder();
         break;
       case 4:
@@ -135,43 +140,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      list.add(control.text);
-    });
-  }
-
-  Widget buildTasks(BuildContext context) {
-    var w = <Widget>[const Text('Here is your to do list:')];
-    for (int i = 0; i < list.length; i++) {
-      w.add(Text(
-        list[i],
-        style: Theme.of(context).textTheme.headlineMedium,
-      ));
-    }
-    w.add(TextField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Enter a new task',
-      ),
-      controller: control,
-    ));
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Add Tasks"),
-      ),
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: w),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
