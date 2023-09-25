@@ -1,4 +1,3 @@
-import "package:congressional_app/dashboard_page.dart";
 import 'package:flutter/material.dart';
 
 import "chat_screen.dart";
