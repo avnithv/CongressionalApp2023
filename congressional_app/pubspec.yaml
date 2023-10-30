@@ -30,6 +30,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  chat_gpt_sdk: ^2.2.4
+   
+  flutter_dotenv: ^5.0.2
+  velocity_x: ^3.6.0
+  
   fluttertoast:
 
   # The following adds the Cupertino Icons font to your application.
