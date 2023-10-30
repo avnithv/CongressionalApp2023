@@ -61,8 +61,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Todo List"),
-        //backgroundColor: Colors.orange[500],
+        title: Text("Task List"),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Column(
@@ -71,20 +70,18 @@ class _TasksWidgetState extends State<TasksWidget> {
         children: <Widget>[
           Container(
             child: TextField(
-              decoration: InputDecoration(hintText: "Enter Todo Text Here"),
+              decoration: InputDecoration(hintText: "Enter a new Task"),
               style: TextStyle(
                 fontSize: 22.0,
-                //color: Theme.of(context).accentColor,
               ),
               controller: textController,
               cursorWidth: 5.0,
               autocorrect: true,
               autofocus: true,
-              //onSubmitted: ,
             ),
           ),
           ElevatedButton(
-            child: Text("Add Todo"),
+            child: Text("Add Item"),
             onPressed: () {
               if (textController.text.isNotEmpty) {
                 WidgetList.add(new ListItem(textController.text, false));
@@ -103,12 +100,10 @@ class _TasksWidgetState extends State<TasksWidget> {
                     child: Dismissible(
                       key: Key(widget.todoText),
                       child: CheckboxListTile(
-                        //key: ValueKey("Checkboxtile $widget"),
                         value: widget.todoCheck,
                         title:
                             _strikeThrough(widget.todoText, widget.todoCheck),
                         onChanged: (checkValue) {
-                          //_strikethrough toggle
                           setState(() {
                             if (checkValue != null && !checkValue) {
                               widget.todoCheck = false;
@@ -125,25 +120,24 @@ class _TasksWidgetState extends State<TasksWidget> {
                       ),
                       confirmDismiss: (dismissDirection) {
                         return showDialog(
-                            //On Dismissing
                             context: context,
                             barrierDismissible: true,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text("Delete Todo?"),
+                                title: Text("Delete Item?"),
                                 actions: <Widget>[
                                   TextButton(
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop(true);
                                     },
-                                  ), //OK Button
+                                  ),
                                   TextButton(
                                     child: Text("Cancel"),
                                     onPressed: () {
                                       Navigator.of(context).pop(false);
                                     },
-                                  ), //Cancel Button
+                                  ),
                                 ],
                               );
                             });
@@ -151,20 +145,18 @@ class _TasksWidgetState extends State<TasksWidget> {
                       direction: DismissDirection.endToStart,
                       movementDuration: const Duration(milliseconds: 200),
                       onDismissed: (dismissDirection) {
-                        //Delete Todo
                         WidgetList.remove(widget);
-                        Fluttertoast.showToast(msg: "Todo Deleted!");
+                        Fluttertoast.showToast(msg: "Item Deleted!");
                       },
                     ),
                     onDoubleTap: () {
                       popUpTextController.text = widget.todoText;
-                      //For Editing Todo
                       showDialog(
                           context: context,
                           barrierDismissible: true,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text("Edit Todo"),
+                              title: Text("Edit Item"),
                               content: TextFormField(
                                 controller: popUpTextController,
                               ),
@@ -178,13 +170,13 @@ class _TasksWidgetState extends State<TasksWidget> {
                                     });
                                     Navigator.of(context).pop(true);
                                   },
-                                ), //OK Button
+                                ),
                                 TextButton(
                                   child: Text("Cancel"),
                                   onPressed: () {
                                     Navigator.of(context).pop(false);
                                   },
-                                ), //Cancel Button
+                                ),
                               ],
                             );
                           });
