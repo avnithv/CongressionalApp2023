@@ -1,8 +1,10 @@
+import "package:congressional_app/mindmap_widget.dart";
 import 'package:flutter/material.dart';
 
 import "chat_screen.dart";
 import "task_page.dart";
 import "dashboard_page.dart";
+import "node.dart";
 
 void main() {
   runApp(const MyApp());
@@ -48,11 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const TasksWidget();
         break;
       case 2:
-        page = const Placeholder();
+        page = MindMapWidget(Node('null'));
         break;
       case 3:
-        // page = ChatScreen();
-        page = const Placeholder();
+        page = ChatScreen();
+        //page = const Placeholder();
         break;
       case 4:
         page = const Placeholder();
