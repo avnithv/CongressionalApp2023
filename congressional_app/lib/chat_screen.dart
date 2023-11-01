@@ -1,9 +1,11 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'chatmessage.dart';
 import 'threedots.dart';
+import 'main.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -38,7 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_controller.text.isEmpty) return;
     ChatMessage message = ChatMessage(
       text: _controller.text,
-      sender: "user",
+      sender: "You",
       isImage: false,
     );
 
@@ -60,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void insertNewData(String response, {bool isImage = false}) {
     ChatMessage botMessage = ChatMessage(
       text: response,
-      sender: "bot",
+      sender: "Owlie",
       isImage: isImage,
     );
 
@@ -98,7 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("ChatBot", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 45,),),),
+        appBar: appBar(),
         body: SafeArea(
           child: Column(
             children: [
@@ -125,4 +127,65 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ));
   }
+}
+
+AppBar appBar() {
+    return AppBar(
+        title: Text(
+          'Chat With Owlie!',
+          style: TextStyle(
+            color: Colors.blueAccent,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            
+          },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                'assets/icons/Arrow - Left 2.svg',
+                height: 20,
+                width: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xffF7F8F8),
+                borderRadius: BorderRadius.circular(10)
+              ),
+            ),
+        ),
+        actions: [
+          Text(
+            '${MyHomePage.coins}',
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          GestureDetector(
+              onTap: () {
+
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10, right: 10),
+                alignment: Alignment.center,
+                width: 37,
+                child: SvgPicture.asset(
+                  'assets/icons/money.svg',
+                  height: 30,
+                  width: 30,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffF7F8F8),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+            ),
+          ),
+        ], 
+      );
 }
