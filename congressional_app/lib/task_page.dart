@@ -56,11 +56,12 @@ class _TasksWidgetState extends State<TasksWidget> {
   var popUpTextController = TextEditingController();
   late TextEditingController controller;
   late TextEditingController coinController;
+  final String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app";
 
   List<ListItem> WidgetList = [];
 
   void readTasks() {
-    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    File file = File(p.join(pth, 'lib', 'tasks.txt'));
     List<String> strs = file.readAsLinesSync();
     for (String i in strs) {
       if (i != "") {
@@ -70,7 +71,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   }
 
   void writeTasks() {
-    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    File file = File(p.join(pth, 'lib', 'tasks.txt'));
     file.writeAsStringSync('');
     for (ListItem i in WidgetList) {
       file.writeAsStringSync(i.getValue() + "\n", mode: FileMode.append);
