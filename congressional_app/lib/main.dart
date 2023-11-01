@@ -6,6 +6,8 @@ import "chat_screen.dart";
 import "task_page.dart";
 import "dashboard_page.dart";
 import "node.dart";
+import "dialog.dart";
+import 'Home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,13 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF8ECAE6)),
         useMaterial3: true,
       ),
       home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -36,7 +38,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final String pth2 = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/images/logo.png";
   @override
   void initState() {
     super.initState();
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF8ECAE6),
       body: Center(
-          child: Image.asset(pth2), // Change the asset path as needed
+          child: Image.asset('/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/Untitled.png'), // Change the asset path as needed
       ),
     );
   }
@@ -64,9 +65,8 @@ class _SplashScreenState extends State<SplashScreen> {
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
-  static var coins=0;
+  static var coins=693;
   static var passwode="1234";
-  static _MyHomePageState? hompate;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -78,17 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var control = TextEditingController();
 
   @override
-  void initState() {
-    MyHomePage.hompate = this;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Widget page;
     switch (selectedPage) {
       case 0:
-        page = const DashboardPage();
+        page = const DashboardPage2();
         break;
       case 1:
         page = TasksWidget();
@@ -110,29 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppBar(
-            leading: const Icon(Icons.person_3_sharp),
-            title: Center(
-                child: Text(
-              "FocusBuddy",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-            actions: [
-              Text(
-                "${MyHomePage.coins}",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontSize: 20,
-                ),
-              ),
-              const Icon(Icons.currency_bitcoin),
-            ],
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          ),
           Expanded(child: page),
         ],
       ),
