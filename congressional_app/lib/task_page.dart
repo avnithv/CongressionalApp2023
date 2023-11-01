@@ -76,6 +76,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   @override
   void initState() {
     super.initState();
+    readTasks();
     controller = TextEditingController();
     coinController = TextEditingController();
   }
