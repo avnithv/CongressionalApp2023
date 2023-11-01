@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF8ECAE6)),
         useMaterial3: true,
       ),
       home: const SplashScreen(),
@@ -30,44 +30,40 @@ class MyApp extends StatelessWidget {
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-   @override
+
+  @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-
 class _SplashScreenState extends State<SplashScreen> {
-    @override
-    void initState() {
-      super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-
-      // Simulate a loading delay (e.g., 2 seconds)
-      Future.delayed(const Duration(seconds: 2), () {
+    // Simulate a loading delay (e.g., 2 seconds)
+    Future.delayed(const Duration(seconds: 2), () {
       // Navigate to the main app's home page (MyHomePage)
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage(),),);
-      });
-    }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => MyHomePage(),
+      ));
+    });
+  }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF8ECAE6),
       body: Center(
-        child: Text(
-          'Focus Buddy',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-        ),
+          child: Image.asset('/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/Untitled.png'), // Change the asset path as needed
       ),
     );
   }
-} 
+}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
-  static var coins=0;
+  static var coins=693;
   static var passwode="1234";
 
   @override
@@ -107,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppBar(
-            leading: const Icon(Icons.person),
+            leading: const Icon(Icons.child_care),
             title: Center(
                 child: Text(
               "FocusBuddy",
@@ -116,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
-            ),),
+            )),
             actions: [
               Text(
                 "${MyHomePage.coins}",
@@ -125,8 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(width: 5,),
-              const Icon(Icons.monetization_on_sharp),
+              const Icon(Icons.currency_bitcoin),
             ],
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           ),
