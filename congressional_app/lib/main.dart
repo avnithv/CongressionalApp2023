@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -36,6 +37,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final String pth2 = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/images/logo.png";
   @override
   void initState() {
     super.initState();
@@ -54,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF8ECAE6),
       body: Center(
-          child: Image.asset('/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/Untitled.png'), // Change the asset path as needed
+          child: Image.asset(pth2), // Change the asset path as needed
       ),
     );
   }
@@ -63,8 +65,9 @@ class _SplashScreenState extends State<SplashScreen> {
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
-  static var coins=693;
+  static var coins=0;
   static var passwode="1234";
+  static _MyHomePageState? hompate;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -74,6 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
   var selectedPage = 0;
   var list = [];
   var control = TextEditingController();
+
+  @override
+  void initState() {
+    MyHomePage.hompate = this;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppBar(
-            leading: const Icon(Icons.child_care),
+            leading: const Icon(Icons.person_3_sharp),
             title: Center(
                 child: Text(
               "FocusBuddy",

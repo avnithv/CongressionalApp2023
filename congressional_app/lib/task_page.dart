@@ -149,6 +149,7 @@ class _TasksWidgetState extends State<TasksWidget> {
                           if (res != null && res[0] == MyHomePage.passwode) {
                             MyHomePage.coins += int.parse(res[1]);
                             WidgetList.remove(widget);
+                            MyHomePage.hompate!.setState(() {});
                             setState(() {});
                           }
                           // setState(() {
