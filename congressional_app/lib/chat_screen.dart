@@ -98,30 +98,31 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(title: const Text("ChatBot")),
         body: SafeArea(
-      child: Column(
-        children: [
-          Flexible(
-              child: ListView.builder(
-            reverse: true,
-            padding: Vx.m8,
-            itemCount: _messages.length,
-            itemBuilder: (context, index) {
-              return _messages[index];
-            },
-          )),
-          if (_isTyping) const ThreeDots(),
-          const Divider(
-            height: 1.0,
+          child: Column(
+            children: [
+              Flexible(
+                  child: ListView.builder(
+                reverse: true,
+                padding: Vx.m8,
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  return _messages[index];
+                },
+              )),
+              if (_isTyping) const ThreeDots(),
+              const Divider(
+                height: 1.0,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: context.cardColor,
+                ),
+                child: _buildTextComposer(),
+              )
+            ],
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: context.cardColor,
-            ),
-            child: _buildTextComposer(),
-          )
-        ],
-      ),
-    ));
+        ));
   }
 }
