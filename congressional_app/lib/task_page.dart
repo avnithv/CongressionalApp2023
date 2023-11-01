@@ -192,7 +192,9 @@ class _TasksWidgetState extends State<TasksWidget> {
                       direction: DismissDirection.endToStart,
                       movementDuration: const Duration(milliseconds: 200),
                       onDismissed: (dismissDirection) {
-                        WidgetList.remove(widget);
+                        setState(() {
+                          WidgetList.remove(widget);
+                        });
                         Fluttertoast.showToast(msg: "Item Deleted!");
                       },
                     ),
