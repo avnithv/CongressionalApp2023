@@ -101,7 +101,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Task List"),
+        title: Text("Task List", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 45,)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Column(
