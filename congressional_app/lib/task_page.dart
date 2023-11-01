@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as p;
 import 'dart:io';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'Home.dart';
 
 class ListItem {
   String todoText;
@@ -154,6 +155,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                             MyHomePage.coins += int.parse(res[1]);
                             WidgetList.remove(widget);
                             setState(() {});
+                            MyHomePage.hompate!.setState(() {});
+                            // DashboardWidget.ez!.setState(() {});
                           }
                           // setState(() {
                           //   if (checkValue != null && !checkValue) {
@@ -181,12 +184,14 @@ class _TasksWidgetState extends State<TasksWidget> {
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop(true);
+                                      // DashboardWidget.ez!.setState(() {});
                                     },
                                   ),
                                   TextButton(
                                     child: Text("Cancel"),
                                     onPressed: () {
                                       Navigator.of(context).pop(false);
+                                      // DashboardWidget.ez!.setState(() {});
                                     },
                                   ),
                                 ],
@@ -201,6 +206,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                           WidgetList.remove(widget);
                         });
                         Fluttertoast.showToast(msg: "Item Deleted!");
+                        // DashboardWidget.ez!.setState(() {});
+
                       },
                     ),
                     onDoubleTap: () {
@@ -223,12 +230,18 @@ class _TasksWidgetState extends State<TasksWidget> {
                                           popUpTextController.text;
                                     });
                                     Navigator.of(context).pop(true);
+                                    // DashboardWidget.ez!.setState(() {});
+
+
                                   },
                                 ),
                                 TextButton(
                                   child: Text("Cancel"),
                                   onPressed: () {
                                     Navigator.of(context).pop(false);
+                                    // DashboardWidget.ez!.setState(() {});
+
+
                                   },
                                 ),
                               ],
@@ -245,6 +258,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                   var replaceWiget = WidgetList.removeAt(oldIndex);
                   WidgetList.insert(newIndex, replaceWiget);
                 });
+                // DashboardWidget.ez!.setState(() {});
+
               },
             ),
           )

@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedPage) {
       case 0:
-        page = const DashboardPage2();
+        page = DashboardWidget();
         break;
       case 1:
         page = TasksWidget();
