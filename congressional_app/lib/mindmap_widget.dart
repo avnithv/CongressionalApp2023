@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'main.dart';
 import 'node.dart';
 import 'mindmap_painter.dart';
 
@@ -44,6 +46,7 @@ class _MindMapWidgetState extends State<MindMapWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: appBar(),
         body: Stack(children: [
       GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -131,4 +134,65 @@ class _MindMapWidgetState extends State<MindMapWidget> {
     }
     toggleEditMode("");
   }
+}
+
+AppBar appBar() {
+    return AppBar(
+        title: Text(
+          'Organize Your Thoughts',
+          style: TextStyle(
+            color: Colors.blueAccent,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            
+          },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                'assets/icons/Arrow - Left 2.svg',
+                height: 20,
+                width: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xffF7F8F8),
+                borderRadius: BorderRadius.circular(10)
+              ),
+            ),
+        ),
+        actions: [
+          Text(
+            '${MyHomePage.coins}',
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          GestureDetector(
+              onTap: () {
+
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10, right: 10),
+                alignment: Alignment.center,
+                width: 37,
+                child: SvgPicture.asset(
+                  'assets/icons/money.svg',
+                  height: 30,
+                  width: 30,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffF7F8F8),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+            ),
+          ),
+        ], 
+      );
 }
