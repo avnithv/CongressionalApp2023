@@ -64,7 +64,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   List<ListItem> WidgetList = [];
 
   void readTasks() {
-    String pth = "/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/tasks.txt";
+    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
     File file = File(pth);
     List<String> strs = file.readAsLinesSync();
     for (String i in strs) {
@@ -75,7 +75,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   }
 
   void writeTasks() {
-    String pth = "/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/tasks.txt";
+    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
     File file = File(pth);
     file.writeAsStringSync('');
     for (ListItem i in WidgetList) {

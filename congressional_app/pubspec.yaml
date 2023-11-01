@@ -87,6 +87,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/
+    - /Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/images/logo.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

@@ -33,7 +33,7 @@ Container _searchField() {
             child: Row(
               children: [
                 Image.asset(
-                  '/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/logo.png',
+                  "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/images/logo.png",                  
                   width: 50,
                   height: 50,
                 ),

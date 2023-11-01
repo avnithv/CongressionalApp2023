@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF8ECAE6),
       body: Center(
-          child: Image.asset('/Users/kanisiva/Documents/VSCode/CongressionalApp/CongressionalApp2023/congressional_app/lib/Untitled.png'), // Change the asset path as needed
+          child: Image.asset('/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/images/logo.png'), // Change the asset path as needed
       ),
     );
   }
@@ -65,8 +65,9 @@ class _SplashScreenState extends State<SplashScreen> {
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
-  static var coins=693;
+  static var coins=0;
   static var passwode="1234";
+  static var hompate;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -77,6 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var list = [];
   var control = TextEditingController();
 
+  @override
+  void initState() {
+    MyHomePage.hompate = this;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Widget page;
