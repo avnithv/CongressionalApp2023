@@ -10,7 +10,7 @@ class DashboardPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 40),
-          Center(child: Text("Welcome Back!", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 50,),)),
+          Center(child: Text("Welcome Back!", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 45,),)),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import "package:congressional_app/dialog.dart";
 import "package:congressional_app/mindmap_widget.dart";
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,7 @@ import "chat_screen.dart";
 import "task_page.dart";
 import "dashboard_page.dart";
 import "node.dart";
+import "dialog.dart";
 
 void main() {
   runApp(const MyApp());
@@ -29,13 +31,15 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
 
+  static var coins=693;
+  static var passwode="1234";
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedPage = 0;
-  var coins = 693;
   var list = [];
   var control = TextEditingController();
 
@@ -47,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const DashboardPage();
         break;
       case 1:
-        page = const TasksWidget();
+        page = TasksWidget();
         break;
       case 2:
         page = MindMapWidget(Node('null'));
@@ -57,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //page = const Placeholder();
         break;
       case 4:
-        page = const Placeholder();
+        page = PasswordPage();
         break;
       default:
         throw UnimplementedError("no widget for page $selectedPage");
@@ -79,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )),
             actions: [
               Text(
-                "$coins",
+                "${MyHomePage.coins}",
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontSize: 20,

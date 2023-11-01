@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindmap/node.dart';
+import 'node.dart';
 
 class MindMapPainter extends CustomPainter {
   final Node tree;

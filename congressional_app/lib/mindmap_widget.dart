@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mindmap/node.dart';
+import 'node.dart';
 import 'mindmap_painter.dart';
 
 class MindMapWidget extends StatefulWidget {

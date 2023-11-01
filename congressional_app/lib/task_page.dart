@@ -1,3 +1,4 @@
+import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -39,7 +40,7 @@ class _strikeThrough extends StatelessWidget {
 
 class TasksWidget extends StatefulWidget {
   const TasksWidget({super.key});
-
+  
   @override
   State<TasksWidget> createState() => _TasksWidgetState();
 }
@@ -47,11 +48,22 @@ class TasksWidget extends StatefulWidget {
 class _TasksWidgetState extends State<TasksWidget> {
   var textController = TextEditingController();
   var popUpTextController = TextEditingController();
+  late TextEditingController controller;
+  late TextEditingController coinController;
 
   List<ListItem> WidgetList = [];
 
   @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+    coinController = TextEditingController();
+  }
+
+  @override
   void dispose() {
+    controller.dispose();
+    coinController.dispose();
     textController.dispose();
     popUpTextController.dispose();
     super.dispose();
@@ -69,8 +81,9 @@ class _TasksWidgetState extends State<TasksWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
+            margin: EdgeInsets.all(24),
             child: TextField(
-              decoration: InputDecoration(hintText: "Enter a new Task"),
+              decoration: InputDecoration(hintText: "Enter a New Task"),
               style: TextStyle(
                 fontSize: 22.0,
               ),
@@ -81,7 +94,7 @@ class _TasksWidgetState extends State<TasksWidget> {
             ),
           ),
           ElevatedButton(
-            child: Text("Add Item"),
+            child: Text("Add Task"),
             onPressed: () {
               if (textController.text.isNotEmpty) {
                 WidgetList.add(new ListItem(textController.text, false));
@@ -103,14 +116,20 @@ class _TasksWidgetState extends State<TasksWidget> {
                         value: widget.todoCheck,
                         title:
                             _strikeThrough(widget.todoText, widget.todoCheck),
-                        onChanged: (checkValue) {
-                          setState(() {
-                            if (checkValue != null && !checkValue) {
-                              widget.todoCheck = false;
-                            } else {
-                              widget.todoCheck = true;
-                            }
-                          });
+                        onChanged: (checkValue) async {
+                          final res = await openDialog(widget.todoText);
+                          if (res != null && res[0] == MyHomePage.passwode) {
+                            MyHomePage.coins += int.parse(res[1]);
+                            WidgetList.remove(widget);
+                            setState(() {});
+                          }
+                          // setState(() {
+                          //   if (checkValue != null && !checkValue) {
+                          //     widget.todoCheck = false;
+                          //   } else {
+                          //     widget.todoCheck = true;
+                          //   }
+                          // });
                         },
                       ),
                       background: Container(
@@ -197,5 +216,44 @@ class _TasksWidgetState extends State<TasksWidget> {
         ],
       ),
     );
+  }
+
+  Future<List<String>?> openDialog(String task) {
+    return showDialog<List<String>>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Confirm Task Completion: $task"),
+        content:
+          Column( 
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                autofocus: true,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(hintText: "Enter Passcode"),
+                controller: controller,
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                autofocus: true,
+                decoration: InputDecoration(hintText: "Enter Reward (Up to 1000 coins)"),
+                controller: coinController,
+              ),
+            ],
+          ),
+        actions: [
+          TextButton(
+            child: Text("CONFIRM"),
+            onPressed: confirm,
+          ),
+        ],
+      ),
+    );
+  }
+  void confirm() {
+    Navigator.of(context).pop([controller.text, coinController.text]);
+    controller.clear();
   }
 }
