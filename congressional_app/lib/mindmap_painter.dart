@@ -107,7 +107,7 @@ class MindMapPainter extends CustomPainter {
         begin: Alignment.bottomLeft,
         end: Alignment.topRight,
         stops: [0.0, 1.0],
-        colors: [Color(0xff662397), Color(0xffdc6c62)]).createShader(rect);
+        colors: [Color(0xFF8ECAE6), Color.fromARGB(255, 255, 255, 255)]).createShader(rect);
     canvas.drawRect(rect, rectPaint);
   }
 }
