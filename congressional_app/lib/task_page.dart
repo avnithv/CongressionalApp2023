@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as p;
 import 'dart:io';
-import 'dart:developer';
 
 class ListItem {
   String todoText;
@@ -47,7 +46,7 @@ class _strikeThrough extends StatelessWidget {
 
 class TasksWidget extends StatefulWidget {
   const TasksWidget({super.key});
-  
+
   @override
   State<TasksWidget> createState() => _TasksWidgetState();
 }
@@ -61,23 +60,20 @@ class _TasksWidgetState extends State<TasksWidget> {
   List<ListItem> WidgetList = [];
 
   void readTasks() {
-    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
-    File file = File(pth);
-    List<String>? strs;
-    if(file.existsSync()) strs = file.readAsLinesSync();
-    if (strs == null) return;
+    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    List<String> strs = file.readAsLinesSync();
     for (String i in strs) {
-      WidgetList.add(ListItem(i, i.contains('false')));
+      if (i != "") {
+        WidgetList.add(ListItem(i, i.contains('false')));
+      }
     }
-    setState(() {});
   }
 
   void writeTasks() {
-    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
-    File file = File(pth);
+    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
     file.deleteSync();
     for (ListItem i in WidgetList) {
-      file.writeAsStringSync(i.getValue(), mode: FileMode.append);
+      file.writeAsStringSync(i.getValue() + "\n", mode: FileMode.append);
     }
   }
 
@@ -85,6 +81,7 @@ class _TasksWidgetState extends State<TasksWidget> {
   void initState() {
     super.initState();
     readTasks();
+    print(WidgetList);
     controller = TextEditingController();
     coinController = TextEditingController();
   }
@@ -92,10 +89,10 @@ class _TasksWidgetState extends State<TasksWidget> {
   @override
   void dispose() {
     controller.dispose();
+    writeTasks();
     coinController.dispose();
     textController.dispose();
     popUpTextController.dispose();
-    writeTasks();
     super.dispose();
   }
 
@@ -253,26 +250,26 @@ class _TasksWidgetState extends State<TasksWidget> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text("Confirm Task Completion: $task"),
-        content:
-          Column( 
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                autofocus: true,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(hintText: "Enter Passcode"),
-                controller: controller,
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                autofocus: true,
-                decoration: InputDecoration(hintText: "Enter Reward (Up to 1000 coins)"),
-                controller: coinController,
-              ),
-            ],
-          ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              autofocus: true,
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: InputDecoration(hintText: "Enter Passcode"),
+              controller: controller,
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              autofocus: true,
+              decoration:
+                  InputDecoration(hintText: "Enter Reward (Up to 1000 coins)"),
+              controller: coinController,
+            ),
+          ],
+        ),
         actions: [
           TextButton(
             child: Text("CONFIRM"),
@@ -282,6 +279,7 @@ class _TasksWidgetState extends State<TasksWidget> {
       ),
     );
   }
+
   void confirm() {
     Navigator.of(context).pop([controller.text, coinController.text]);
     controller.clear();
