@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart' as p;
 import 'dart:io';
+import 'dart:developer';
 
 class ListItem {
   String todoText;
@@ -60,15 +61,20 @@ class _TasksWidgetState extends State<TasksWidget> {
   List<ListItem> WidgetList = [];
 
   void readTasks() {
-    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
-    List<String> strs = file.readAsLinesSync();
+    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
+    File file = File(pth);
+    List<String>? strs;
+    if(file.existsSync()) strs = file.readAsLinesSync();
+    if (strs == null) return;
     for (String i in strs) {
       WidgetList.add(ListItem(i, i.contains('false')));
     }
+    setState(() {});
   }
 
   void writeTasks() {
-    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    String pth = "/Users/avnith/Desktop/Congressional App Challenge/app/CongressionalApp2023/congressional_app/lib/tasks.txt";
+    File file = File(pth);
     file.deleteSync();
     for (ListItem i in WidgetList) {
       file.writeAsStringSync(i.getValue(), mode: FileMode.append);
@@ -89,6 +95,7 @@ class _TasksWidgetState extends State<TasksWidget> {
     coinController.dispose();
     textController.dispose();
     popUpTextController.dispose();
+    writeTasks();
     super.dispose();
   }
 
