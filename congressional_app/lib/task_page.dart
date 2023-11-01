@@ -6,6 +6,10 @@ class ListItem {
   String todoText;
   bool todoCheck;
   ListItem(this.todoText, this.todoCheck);
+
+  String getValue() {
+    return todoText;
+  }
 }
 
 class _strikeThrough extends StatelessWidget {
@@ -52,6 +56,22 @@ class _TasksWidgetState extends State<TasksWidget> {
   late TextEditingController coinController;
 
   List<ListItem> WidgetList = [];
+
+  void readTasks() {
+    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    List<String> strs = file.readAsLinesSync();
+    for (String i in strs) {
+      WidgetList.add(ListItem(i, i.contains('false')));
+    }
+  }
+
+  void writeTasks() {
+    File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
+    file.deleteSync();
+    for (ListItem i in WidgetList) {
+      file.writeAsStringSync(i.getValue(), mode: FileMode.append);
+    }
+  }
 
   @override
   void initState() {
