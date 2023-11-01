@@ -16,6 +16,7 @@ class _PasswordPage extends State<PasswordPage> {
   late TextEditingController controller;
   late TextEditingController controller2;
   late TextEditingController controller3;
+  late TextEditingController controller4;
 
   @override
   void initState() {
@@ -23,12 +24,14 @@ class _PasswordPage extends State<PasswordPage> {
     controller = TextEditingController();
     controller2 = TextEditingController();
     controller3 = TextEditingController();
+    controller4 = TextEditingController();
   }
 
   @override void dispose() {
     controller.dispose();
     controller2.dispose();
     controller3.dispose();
+    controller4.dispose();
     super.dispose();
   }
 
@@ -46,9 +49,10 @@ class _PasswordPage extends State<PasswordPage> {
             ElevatedButton(
               child: Text("Change Password"),
               onPressed: () async {
-                final pass = await openDialog();
-                if (pass != null) log(pass);
-                if (pass != null && !pass.isEmpty) MyHomePage.passwode = pass;
+                final res = await openDialog();
+                if (res != null && res[0] == MyHomePage.passwode) {
+                  if (!res[1].isEmpty) MyHomePage.passwode = res[1];
+                }
               }
             ),
             const SizedBox(height: 20,),
@@ -57,9 +61,11 @@ class _PasswordPage extends State<PasswordPage> {
             ElevatedButton(
               child: Text("Set Number of Coins"),
               onPressed: () async {
-                final name = await openDialog2();
-                if (name == null || name.isEmpty) return;
-                MyHomePage.coins = int.parse(name);
+                final res = await openDialog2();
+                if (res != null && res[0] == MyHomePage.passwode) {
+                  MyHomePage.coins = int.parse(res[1]);
+                  MyHomePage.hompate!.setState(() {});
+                }
               }
             )
           ],
@@ -68,8 +74,8 @@ class _PasswordPage extends State<PasswordPage> {
     );
   }
 
-  Future<String?> openDialog() {
-    return showDialog<String>(
+  Future<List<String>?> openDialog() {
+    return showDialog<List<String>>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text("Change your Password"),
@@ -107,8 +113,8 @@ class _PasswordPage extends State<PasswordPage> {
   }
 
 
-  Future<String?> openDialog2() {
-    return showDialog<String>(
+  Future<List<String>?> openDialog2() {
+    return showDialog<List<String>>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text("Modify the Number of Coins"),
@@ -119,6 +125,12 @@ class _PasswordPage extends State<PasswordPage> {
               TextField(
                 autofocus: true,
                 obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(hintText: "Enter Passcode"),
+                controller: controller4,
+              ),
+              TextField(
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(hintText: "New Number of Coins"),
@@ -198,12 +210,14 @@ class _PasswordPage extends State<PasswordPage> {
 }
 
   void confirm() {
-    Navigator.of(context).pop(controller2.text);
+    Navigator.of(context).pop([controller.text, controller2.text]);
     controller.clear();
+    controller2.clear();
   }
 
   void confirm2() {
-    Navigator.of(context).pop(controller3.text);
-    controller.clear();
+    Navigator.of(context).pop([controller4.text, controller3.text]);
+    controller4.clear();
+    controller3.clear();
   }
 }
