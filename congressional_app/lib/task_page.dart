@@ -71,7 +71,9 @@ class _TasksWidgetState extends State<TasksWidget> {
 
   void writeTasks() {
     File file = File(p.join(Directory.current.path, 'lib', 'tasks.txt'));
-    file.deleteSync();
+    if (file.length() != 0) {
+      file.deleteSync();
+    }
     for (ListItem i in WidgetList) {
       file.writeAsStringSync(i.getValue() + "\n", mode: FileMode.append);
     }
